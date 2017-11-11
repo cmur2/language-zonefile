@@ -1,0 +1,58 @@
+scopeName: 'source.zonefile'
+name: 'Bind Zone File'
+fileTypes: [
+  'zone'
+  'db'
+]
+patterns: [
+  {
+    match: ';.*'
+    name: 'comment.line.semicolon.zonefile'
+  }
+  {
+    match: '@'
+    name: 'keyword.directive.zonefile'
+  }
+  {
+    match: '\\$(ORIGIN|origin|TTL|ttl|INCLUDE|include)\\s*([^;]*)(;.*)?'
+    name: 'keyword.directive.zonefile'
+    captures:
+      '2':
+        name: 'variable.other.directive.zonefile'
+      '3':
+        name: 'comment.line.semicolon.zonefile'
+  }
+  {
+    match: '\\d+(H|h|D|d|W|w|M|m|Y|y)'
+    name: 'variable.other.timeunit.zonefile'
+  }
+  {
+    begin: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)\\('
+    beginCaptures:
+      '2':
+        name: 'variable.other.timeunit.zonefile'
+      '3':
+        name: 'keyword.resourcetype.zonefile'
+      '4':
+        name: 'string.quoted.single.resource.address.zonefile'
+    end: '\\)'
+    name: 'string.quoted.single.address.zonefile'
+    patterns: [
+      {
+        match: ';.*'
+        name: 'comment.line.semicolon.zonefile'
+      }
+    ]
+  }
+  {
+    match: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)'
+    name: 'string.quoted.single.address.zonefile'
+    captures:
+      '2':
+        name: 'variable.other.timeunit.zonefile'
+      '3':
+        name: 'keyword.resourcetype.zonefile'
+      '4':
+        name: 'string.quoted.single.resource.address.zonefile'
+  }
+]

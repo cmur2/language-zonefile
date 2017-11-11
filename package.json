@@ -1,0 +1,17 @@
+{
+  "name": "language-zonefile",
+  "description": "Bind Zone File language support in Atom",
+  "version": "0.0.0",
+  "engines": {
+    "atom": "*"
+  },
+  "homepage": "https://github.com/cmur2/language-zonefile",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cmur2/language-zonefile.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmur2/language-zonefile/issues"
+  }
+}
