@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+NEW FEATURES:
+
+- Support toggling comments
+
 ## 1.0.0 (November 11, 2017)
 
 NEW FEATURES:
