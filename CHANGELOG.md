@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0
+## 1.1.0 (November 26, 2017)
 
 NEW FEATURES:
 
@@ -12,6 +12,7 @@ NEW FEATURES:
 IMPROVEMENTS:
 
 - Add example zone file using many possibilities offered by RFC 1035 syntax (even if this package does not highlight it correctly)
+- Add installation instructions and screenshot
 
 ## 1.0.0 (November 11, 2017)
 
