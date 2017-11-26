@@ -5,6 +5,9 @@
 NEW FEATURES:
 
 - Support toggling comments
+- Support `CH` resource record class in addition to `IN`
+- Support `"..."` strings correctly in resource data
+- Support `\X` escape sequences in resource data
 
 IMPROVEMENTS:
 

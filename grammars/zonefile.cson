@@ -4,63 +4,80 @@ fileTypes: [
   'zone'
   'db'
 ]
+
 patterns: [
-  {
-    match: ';.*'
-    name: 'comment.line.semicolon.zonefile'
-  }
-  {
-    match: '@'
-    name: 'keyword.entry.control.zonefile'
-  }
-  {
-    match: '\\$(ORIGIN|origin|TTL|ttl|INCLUDE|include)\\s+([^;]*)'
-    name: 'keyword.entry.control.zonefile'
-    captures:
-      '2':
-        name: 'variable.other.entry.control.zonefile'
-  }
-  {
-    match: '\\d+(H|h|D|d|W|w|M|m|Y|y)'
-    name: 'variable.other.ttl.zonefile'
-  }
-  {
-    begin: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*\\()'
-    beginCaptures:
-      '1':
-        name: 'string.unquoted.domain.name.zonefile'
-      '2':
-        name: 'variable.other.ttl.zonefile'
-      '3':
-        name: 'keyword.resource.type.zonefile'
-      '4':
-        name: 'string.quoted.resource.data.zonefile'
-    end: '(\\))'
-    endCaptures:
-      '1':
-        name: 'string.quoted.resource.data.zonefile'
-    name: 'meta.entry.resource.record'
+  {include: '#comments'}
+  {include: '#entries'}
+]
+
+repository:
+  comments:
     patterns: [
       {
         match: ';.*'
         name: 'comment.line.semicolon.zonefile'
       }
+    ]
+  entries:
+    patterns: [
       {
-        match: '[^\\)]+?'
-        name: 'string.quoted.resource.data.zonefile'
+        match: '(\\$(ORIGIN|origin|TTL|ttl|INCLUDE|include))\\s+([^;]+)'
+        captures:
+          '1':
+            name: 'keyword.entry.control.zonefile'
+          '3':
+            name: 'variable.other.entry.control.zonefile'
+      }
+      {
+        begin: '((@)|([A-Za-z0-9_.-]+))?(\\s+\\d+[A-Za-z])?\\s+(IN|in|CH|ch)\\s+(\\w+)\\s+'
+        beginCaptures:
+          '2':
+            name: 'keyword.entry.resource.record.zonefile'
+          '3':
+            name: 'string.unquoted.domain.name.zonefile'
+          '4':
+            name: 'variable.other.ttl.zonefile'
+          '5':
+            name: 'keyword.class.zonefile'
+          '6':
+            name: 'keyword.resource.type.zonefile'
+        end: '\\n'
+        name: 'meta.entry.resource.record.zonefile'
+        patterns: [
+          {include: '#comments'}
+          {include: '#rdata'}
+        ]
       }
     ]
-  }
-  {
-    match: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)'
-    captures:
-      '1':
-        name: 'string.unquoted.domain.name.zonefile'
-      '2':
-        name: 'variable.other.ttl.zonefile'
-      '3':
-        name: 'keyword.resource.type.zonefile'
-      '4':
+  rdata:
+    patterns: [
+      {
+        match: '(\\\\([^\\d]|[\\d]{3,3}))'
+        name: 'string.unquoted.escape.zonefile'
+        captures:
+          '1':
+            name: 'constant.string.unquoted.escape.zonefile'
+      }
+      {
+        match: '"[^"]*"'
+        name: 'string.quoted.double.resource.data.zonefile'
+      }
+      {
+        begin: '(\\()'
+        beginCaptures:
+          '1':
+            name: 'string.unquoted.resource.data.zonefile'
+        end: '(\\))'
+        endCaptures:
+          '1':
+            name: 'string.unquoted.resource.data.zonefile'
+        patterns: [
+          {include: '#comments'}
+          {include: '#rdata'}
+        ]
+      }
+      {
+        match: '[^\\s]+?'
         name: 'string.unquoted.resource.data.zonefile'
-  }
-]
+      }
+    ]
