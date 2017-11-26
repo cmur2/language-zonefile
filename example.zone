@@ -1,0 +1,36 @@
+$TTL 86400 ; 24 hours, could have been written as 24h or 1d
+$ORIGIN example.com.
+
+@			7d	IN SOA		ns1.example.com. hostmaster.example.com. (
+								2017010101 ; serial
+								3H ; refresh
+								15 ; retry
+								1W ; expire
+								5m ; minimum
+							)
+
+; name servers
+			7D	IN NS		ns1.example.com. ; in the domain
+			7D	IN NS		ns2.example.org. ; external to domain
+
+; services and hosts
+ns1				IN A		192.168.0.1			; name server IPv4 address
+ns1				IN AAAA		2001:0db8::1		; name server IPv6 address
+www				IN A		192.168.0.2			; web server
+ftp				IN CNAME	www.example.com.	; ftp alias (absolute)
+xmpp			IN CNAME	www                 ; xmpp alias (relative)
+
+; mail
+				IN MX		10 mail.example.org. ; external mail provider
+mail._domainkey	IN TXT		"v=DKIM1\; h=sha256\; k=rsa\; s=email\; p=loooooooooog"
+
+; CAA records for Let's Encrypt, one in RFC 3597 syntax
+				IN CAA		0 issue "letsencrypt.org"
+; 				IN CAA		0 iodef "mailto:abuse@example.com"
+				IN TYPE257	\# 31 0005696F6465666D61696C746F3A6162757365406578616D706C652E636F6D
+
+; xmpp
+_jabber._tcp	IN SRV		5 0 5269 xmpp
+
+; special
+xx.lcs.mit.edu.	CH A		mit.edu. 2420

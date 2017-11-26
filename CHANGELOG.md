@@ -6,6 +6,10 @@ NEW FEATURES:
 
 - Support toggling comments
 
+IMPROVEMENTS:
+
+- Add example zone file using many possibilities offered by RFC 1035 syntax (even if this package does not highlight it correctly)
+
 ## 1.0.0 (November 11, 2017)
 
 NEW FEATURES:
