@@ -11,46 +11,56 @@ patterns: [
   }
   {
     match: '@'
-    name: 'keyword.directive.zonefile'
+    name: 'keyword.entry.control.zonefile'
   }
   {
-    name: 'keyword.directive.zonefile'
     match: '\\$(ORIGIN|origin|TTL|ttl|INCLUDE|include)\\s+([^;]*)'
+    name: 'keyword.entry.control.zonefile'
     captures:
       '2':
-        name: 'variable.other.directive.zonefile'
+        name: 'variable.other.entry.control.zonefile'
   }
   {
     match: '\\d+(H|h|D|d|W|w|M|m|Y|y)'
-    name: 'variable.other.timeunit.zonefile'
+    name: 'variable.other.ttl.zonefile'
   }
   {
-    begin: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)\\('
+    begin: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*\\()'
     beginCaptures:
+      '1':
+        name: 'string.unquoted.domain.name.zonefile'
       '2':
-        name: 'variable.other.timeunit.zonefile'
+        name: 'variable.other.ttl.zonefile'
       '3':
-        name: 'keyword.resourcetype.zonefile'
+        name: 'keyword.resource.type.zonefile'
       '4':
-        name: 'string.quoted.single.resource.address.zonefile'
-    end: '\\)'
-    name: 'string.quoted.single.address.zonefile'
+        name: 'string.quoted.resource.data.zonefile'
+    end: '(\\))'
+    endCaptures:
+      '1':
+        name: 'string.quoted.resource.data.zonefile'
+    name: 'meta.entry.resource.record'
     patterns: [
       {
         match: ';.*'
         name: 'comment.line.semicolon.zonefile'
       }
+      {
+        match: '[^\\)]+?'
+        name: 'string.quoted.resource.data.zonefile'
+      }
     ]
   }
   {
     match: '([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)'
-    name: 'string.quoted.single.address.zonefile'
     captures:
+      '1':
+        name: 'string.unquoted.domain.name.zonefile'
       '2':
-        name: 'variable.other.timeunit.zonefile'
+        name: 'variable.other.ttl.zonefile'
       '3':
-        name: 'keyword.resourcetype.zonefile'
+        name: 'keyword.resource.type.zonefile'
       '4':
-        name: 'string.quoted.single.resource.address.zonefile'
+        name: 'string.unquoted.resource.data.zonefile'
   }
 ]
