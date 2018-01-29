@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+IMPROVEMENTS:
+
+- Make resource record class (like `IN`) optional
+
 ## 1.1.0 (November 26, 2017)
 
 NEW FEATURES:
