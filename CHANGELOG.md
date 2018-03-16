@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 (March 16, 2018)
+
+IMPROVEMENTS:
+
+- Support numeric-only TTL values
+
 ## 1.1.2 (February 21, 2018)
 
 IMPROVEMENTS:

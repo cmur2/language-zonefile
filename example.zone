@@ -19,6 +19,7 @@ ns1				IN AAAA		2001:0db8::1		; name server IPv6 address
 www				IN A		192.168.0.2			; web server
 ftp				IN CNAME	www.example.com.	; ftp alias (absolute)
 xmpp			IN CNAME	www                 ; xmpp alias (relative)
+dyn			60	IN CNAME	www					; dynamic alias (TTL in seconds)
 
 ; mail
 				IN MX		10 mail.example.org. ; external mail provider

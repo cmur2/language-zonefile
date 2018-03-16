@@ -29,7 +29,7 @@ repository:
             name: 'variable.other.entry.control.zonefile'
       }
       {
-        begin: '((@)|([A-Za-z0-9_.-]+))?(\\s+\\d+[A-Za-z])?(\\s+IN|in|CH|ch)?\\s+(\\w+)\\s+'
+        begin: '((@)|([A-Za-z0-9_.-]+))?(\\s+\\d+[A-Za-z]*)?(\\s+IN|in|CH|ch)?\\s+(\\w+)\\s+'
         beginCaptures:
           '2':
             name: 'keyword.entry.resource.record.zonefile'
